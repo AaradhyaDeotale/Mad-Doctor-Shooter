@@ -14,6 +14,16 @@ public class PlayerMovement : MonoBehaviour
     private float xAxis, yAxis;
     private PlayerAnimation playerAnimation;
 
+    [SerializeField]
+    private float shootWaitTime = 0.5f;
+
+    private float waitBeforeShooting;
+
+    [SerializeField]
+    private float moveWaitTime = 0.3f;
+    private float waitBeforeMoving;
+
+    private bool canMove = true;
     private void Awake()
     {
         playerAnimation = GetComponent<PlayerAnimation>();
@@ -30,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
     {
         xAxis = Input.GetAxisRaw(TagManager.HORIZONTAL_AXIS);
         yAxis = Input.GetAxisRaw(TagManager.VERTICAL_AXIS);
+        if (!canMove)
+            return;
+
         tempPos = transform.position;
         tempPos.x += xAxis * moveSpeed * Time.deltaTime;
         tempPos.y += yAxis * moveSpeed * Time.deltaTime;
@@ -51,6 +64,8 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleAnimation()
     {
+        if (!canMove)
+            return;
         if (playerAnimation != null)
         {
             if (Mathf.Abs(xAxis) > 0 || Mathf.Abs(yAxis) > 0)
@@ -78,6 +93,34 @@ public class PlayerMovement : MonoBehaviour
 
             if (Mathf.Abs(transform.localScale.z) < 0.001f)
                 transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, 1f);
+        }
+    }
+
+    void StopMovement()
+    {
+        canMove = false;
+        waitBeforeMoving = Time.time + moveWaitTime;
+    }    
+
+    void Shoot()
+    {
+        waitBeforeShooting = Time.time + shootWaitTime;
+        StopMovement();
+        playerAnimation.PlayAnimation(TagManager.SHOOT_ANIMATION_NAME);
+    }
+
+    void CheckIfCanMove()
+    {
+        if (Time.time > waitBeforeMoving)
+            canMove = true;
+    }
+
+    void HandleShooting()
+    {
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            if (Time.time > waitBeforeShooting)
+                Shoot();
         }
     }
 

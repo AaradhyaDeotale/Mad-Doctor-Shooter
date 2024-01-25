@@ -1,0 +1,4 @@
+repository "Mad Doctor Shooter@AaradhyaDeotale@cloud"
+  path "/"
+    br "/main"
+    co "/main"

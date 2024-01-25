@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     [SerializeField]
     private float moveSpeed = 5f;
 
     [SerializeField]
     private float minBound_X = -67f, maxBound_X = 70f, minBound_Y = -3.3f, maxBound_Y = 0f;
+
     private Vector3 tempPos;
     private float xAxis, yAxis;
     private PlayerAnimation playerAnimation;
+
     // Update is called once per frame
     void Update()
     {
         HandleMovement();
         HandleAnimation();
+        HandleFacingDirection();
     }
 
     void HandleMovement()
@@ -45,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleAnimation()
     {
-        // Check if playerAnimation is not null before calling PlayAnimation
         if (playerAnimation != null)
         {
             if (Mathf.Abs(xAxis) > 0 || Mathf.Abs(yAxis) > 0)
@@ -54,4 +55,15 @@ public class PlayerMovement : MonoBehaviour
                 playerAnimation.PlayAnimation(TagManager.IDLE_ANIMATION_NAME);
         }
     }
-} //class
+
+    void HandleFacingDirection()
+    {
+        if (playerAnimation != null)
+        {
+            if (xAxis > 0)
+                playerAnimation.SetFacingDirection(true);
+            else if (xAxis < 0)
+                playerAnimation.SetFacingDirection(false);
+        }
+    }
+}

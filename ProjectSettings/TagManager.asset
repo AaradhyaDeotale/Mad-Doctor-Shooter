@@ -47,11 +47,11 @@ TagManager:
   - name: Bullet
     uniqueID: 2905035195
     locked: 0
-  - name: Enemy
-    uniqueID: 2695966895
-    locked: 0
   - name: Player
     uniqueID: 3825082079
+    locked: 0
+  - name: Enemy
+    uniqueID: 2695966895
     locked: 0
   - name: UI
     uniqueID: 895012503

@@ -14,7 +14,11 @@ public class PlayerMovement : MonoBehaviour
     private float xAxis, yAxis;
     private PlayerAnimation playerAnimation;
 
-    // Update is called once per frame
+    private void Awake()
+    {
+        playerAnimation = GetComponent<PlayerAnimation>();
+    }
+
     void Update()
     {
         HandleMovement();
@@ -60,10 +64,22 @@ public class PlayerMovement : MonoBehaviour
     {
         if (playerAnimation != null)
         {
-            if (xAxis > 0)
-                playerAnimation.SetFacingDirection(true);
-            else if (xAxis < 0)
-                playerAnimation.SetFacingDirection(false);
+            if (xAxis != 0) // Check if the player is moving horizontally
+            {
+                if (xAxis > 0)
+                    playerAnimation.SetFacingDirection(true); // Face right when moving right
+                else
+                    playerAnimation.SetFacingDirection(false); // Face left when moving left
+            }
+
+            // Ensure Y and Z scales are not set to 0
+            if (Mathf.Abs(transform.localScale.y) < 0.001f)
+                transform.localScale = new Vector3(transform.localScale.x, 1f, transform.localScale.z);
+
+            if (Mathf.Abs(transform.localScale.z) < 0.001f)
+                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, 1f);
         }
     }
+
+
 }

@@ -16,6 +16,14 @@ public class Enemy : MonoBehaviour
 
     private PlayerAnimation enemyAnimation;
 
+    [SerializeField]
+    private float attackWaitTime = 2.5f;
+    private float attackTimer;
+
+    [SerializeField]
+    private float attackFinishedWaitTime = 0.5f;
+    private float attackFinishedTimer;
+
     private void Awake()
     {
         playerTarget = GameObject.FindWithTag(TagManager.PLAYER_TAG).transform;
@@ -37,7 +45,13 @@ public class Enemy : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, playerTarget.position, moveSpeed = Time.deltaTime);
 
             enemyAnimation.PlayAnimation(TagManager.WALK_ANIMATION_NAME);
-            HandleFacingDirection()
+            HandleFacingDirection();
+        }
+        else
+        {
+            CheckIfAttackFinished();
+            Attack();
+
         }
 
 
@@ -53,5 +67,22 @@ public class Enemy : MonoBehaviour
             tempScale.x = -Mathf.Abs(tempScale.x);
 
         transform.localScale = tempScale;
+    }
+
+    void CheckIfAttackFinished()
+    {
+        if (Time.time > attackFinishedTimer)
+            enemyAnimation.PlayAnimation(TagManager.IDLE_ANIMATION_NAME);
+    }
+
+    void Attack()
+    {
+        if(Time.time > attackTimer)
+        {
+            attackFinishedTimer = Time.time + attackFinishedWaitTime;
+            attackTimer = Time.time + attackWaitTime;
+
+            enemyAnimation.PlayAnimation(TagManager.ATTACK_ANIMATION_NAME);
+        }
     }
 }

@@ -24,13 +24,17 @@ public class PlayerMovement : MonoBehaviour
     private float waitBeforeMoving;
 
     private bool canMove = true;
+
+    private PlayerShootingManager playerShootingManager;
     private void Awake()
     {
         playerAnimation = GetComponent<PlayerAnimation>();
+        playerShootingManager = GetComponent<PlayerShootingManager>();
     }
 
     void Update()
-    {
+    {   
+
         HandleMovement();
         HandleAnimation();
         HandleFacingDirection();
@@ -107,6 +111,8 @@ public class PlayerMovement : MonoBehaviour
         waitBeforeShooting = Time.time + shootWaitTime;
         StopMovement();
         playerAnimation.PlayAnimation(TagManager.SHOOT_ANIMATION_NAME);
+
+        playerShootingManager.Shoot(transform.localScale.x);
     }
 
     void CheckIfCanMove()
@@ -119,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.K))
         {
+            Debug.Log("Shooting key pressed");
             if (Time.time > waitBeforeShooting)
                 Shoot();
         }

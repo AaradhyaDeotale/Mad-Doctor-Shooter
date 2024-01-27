@@ -12,7 +12,7 @@ GameObject:
   m_Layer: 0
   m_Name: Bullet Spawn Position
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 1539687022650577011}
   - component: {fileID: 5276002832774828698}
   - component: {fileID: 7295937437674435849}
+  - component: {fileID: 5449692235735603738}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -222,6 +223,7 @@ MonoBehaviour:
   maxBound_X: 71
   minBound_Y: -3.3
   maxBound_Y: 0
+  playerAnimation: {fileID: 5276002832774828698}
   shootWaitTime: 0.5
   moveWaitTime: 0.3
 --- !u!114 &5276002832774828698
@@ -250,3 +252,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4663768371521247638, guid: b2d42b26fc88eb948af2470254b12e39, type: 3}
   bulletSpawnPos: {fileID: 6638115998281122659}
+--- !u!114 &5449692235735603738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5933605863781016360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5967fabc4977b334f9d6fdaa5afdacae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackButton: {fileID: 0}
+  playerMovement: {fileID: 1539687022650577011}

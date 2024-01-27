@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerShootingManager : MonoBehaviour
 {
-
     [SerializeField]
     private GameObject bulletPrefab;
 
@@ -13,12 +12,9 @@ public class PlayerShootingManager : MonoBehaviour
 
     public void Shoot(float facingDirection)
     {
-        GameObject newBullet = Instantiate(bulletPrefab, bulletSpawnPos.position,
-            Quaternion.identity);
+        GameObject newBullet = Instantiate(bulletPrefab, bulletSpawnPos.position, Quaternion.identity);
 
         if (facingDirection < 0)
             newBullet.GetComponent<Bullet>().SetNegativeSpeed();
     }
-
-
-}//class
+}

@@ -12,7 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 tempPos;
     private float xAxis, yAxis;
-    private PlayerAnimation playerAnimation;
+
+    public PlayerAnimation playerAnimation;
 
     [SerializeField]
     private float shootWaitTime = 0.5f;
@@ -66,6 +67,11 @@ public class PlayerMovement : MonoBehaviour
         transform.position = tempPos;
     }
 
+    public void HandleAttackButton()
+    {
+        if (Time.time > waitBeforeShooting)
+            Shoot();
+    }
     void HandleAnimation()
     {
         if (!canMove)

@@ -27,6 +27,7 @@ public class PlayerAnimation : MonoBehaviour
         currentAnimation = Animator.StringToHash(animationName);
     }
 
+
     public void SetFacingDirection(bool faceRight)
     {
         if (faceRight)
@@ -35,6 +36,11 @@ public class PlayerAnimation : MonoBehaviour
             tempScale.x = -1f;
 
         transform.localScale = tempScale;
+    }
+
+    public void PlayAttackAnimation()
+    {
+        anim.Play(TagManager.ATTACK_ANIMATION_NAME);
     }
 }
     

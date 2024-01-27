@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private float xAxis, yAxis;
 
     public PlayerAnimation playerAnimation;
+    public AttackButton attackButton; // Add reference to AttackButton script
 
     [SerializeField]
     private float shootWaitTime = 0.5f;
@@ -25,8 +26,14 @@ public class PlayerMovement : MonoBehaviour
     private float waitBeforeMoving;
 
     private bool canMove = true;
-
     private PlayerShootingManager playerShootingManager;
+
+    void Start()
+    {
+        // Manually assign AttackButton reference
+        attackButton = FindObjectOfType<AttackButton>();
+    }
+
     private void Awake()
     {
         playerAnimation = GetComponent<PlayerAnimation>();
@@ -34,11 +41,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update()
-    {   
-
+    {
         HandleMovement();
         HandleAnimation();
         HandleFacingDirection();
+        HandleShooting();
+        HandleAttackButton();
     }
 
     void HandleMovement()
@@ -67,15 +75,22 @@ public class PlayerMovement : MonoBehaviour
         transform.position = tempPos;
     }
 
-    public void HandleAttackButton()
+    void HandleAttackButton()
     {
-        if (Time.time > waitBeforeShooting)
-            Shoot();
+        // Check if the attack button is pressed
+        if (attackButton.IsAttacking())
+        {
+            playerAnimation.PlayAttackAnimation();
+            Shoot();  // Call the shooting method when the attack button is pressed
+        }
     }
+
+
     void HandleAnimation()
     {
         if (!canMove)
             return;
+
         if (playerAnimation != null)
         {
             if (Mathf.Abs(xAxis) > 0 || Mathf.Abs(yAxis) > 0)
@@ -110,13 +125,13 @@ public class PlayerMovement : MonoBehaviour
     {
         canMove = false;
         waitBeforeMoving = Time.time + moveWaitTime;
-    }    
+    }
 
-    void Shoot()
+    public void Shoot()
     {
         waitBeforeShooting = Time.time + shootWaitTime;
         StopMovement();
-        playerAnimation.PlayAnimation(TagManager.SHOOT_ANIMATION_NAME);
+        playerAnimation.PlayAnimation(TagManager.ATTACK_ANIMATION_NAME);
 
         playerShootingManager.Shoot(transform.localScale.x);
     }
@@ -129,13 +144,11 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleShooting()
     {
-        if(Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             Debug.Log("Shooting key pressed");
             if (Time.time > waitBeforeShooting)
                 Shoot();
         }
     }
-
-
 }

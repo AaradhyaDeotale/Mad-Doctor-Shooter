@@ -1,14 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
+
 
 public class PlayerAnimation : MonoBehaviour
 {
-
     private Animator anim;
-
     private Vector3 tempScale;
-
     private int currentAnimation;
 
     private void Awake()
@@ -18,15 +16,12 @@ public class PlayerAnimation : MonoBehaviour
 
     public void PlayAnimation(string animationName)
     {
-
         if (currentAnimation == Animator.StringToHash(animationName))
             return;
 
         anim.Play(animationName);
-
         currentAnimation = Animator.StringToHash(animationName);
     }
-
 
     public void SetFacingDirection(bool faceRight)
     {
@@ -40,7 +35,20 @@ public class PlayerAnimation : MonoBehaviour
 
     public void PlayAttackAnimation()
     {
-        anim.Play(TagManager.ATTACK_ANIMATION_NAME);
+        Debug.Log("Playing Attack Animation");
+        StartCoroutine(PlayAttackAnimationCoroutine());
     }
+
+    private IEnumerator PlayAttackAnimationCoroutine()
+    {
+        Debug.Log("Start Attack Animation");
+        anim.Play(TagManager.ATTACK_ANIMATION_NAME);
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorClipInfo(0).Length);
+        anim.Play(TagManager.IDLE_ANIMATION_NAME);
+        Debug.Log("End Attack Animation");
+    }
+
 }
-    
+
+
+

@@ -1,49 +1,48 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AttackButton : MonoBehaviour
 {
     public Button attackButton;
-    public PlayerMovement playerMovement;
+    public PlayerShootingManager playerShootingManager; // Update the reference type to PlayerShootingManager
+    private bool isAttacking;
 
-    void Start()
+    void Awake()
     {
-        // Ensure you've assigned the playerMovement script in the Unity Editor
-        playerMovement = GetComponent<PlayerMovement>();
+        // Ensure you've assigned the playerShootingManager script in the Unity Editor
+        playerShootingManager = FindObjectOfType<PlayerShootingManager>();
+        if (playerShootingManager == null)
+            Debug.LogError("PlayerShootingManager reference not found in Awake.");
+
         attackButton.onClick.AddListener(OnAttackButtonClick);
     }
 
-    void FindPlayer()
+    public bool IsAttacking()
     {
-        // Find the Player GameObject by its tag
-        GameObject playerObject = GameObject.FindGameObjectWithTag(TagManager.PLAYER_TAG);
-
-        if (playerObject != null)
-        {
-            // Get the PlayerMovement component from the Player GameObject
-            playerMovement = playerObject.GetComponent<PlayerMovement>();
-
-            if (playerMovement == null)
-            {
-                Debug.LogError("PlayerMovement component not found on the Player GameObject.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Player GameObject not found.");
-        }
+        return isAttacking;
     }
+
     void OnAttackButtonClick()
     {
-        if (playerMovement != null)
+        Debug.Log("AttackButton Clicked");
+        if (playerShootingManager != null)
         {
-            playerMovement.HandleAttackButton();
+            playerShootingManager.SetIsAttacking(true);
+            isAttacking = true;
         }
         else
         {
-            Debug.LogError("PlayerMovement reference not assigned in AttackButton script.");
+            Debug.LogError("PlayerShootingManager reference not assigned in AttackButton script.");
+        }
+    }
+
+    public void OnAttackButtonRelease()
+    {
+        if (playerShootingManager != null)
+        {
+            playerShootingManager.SetIsAttacking(false);
+            isAttacking = false;
         }
     }
 }

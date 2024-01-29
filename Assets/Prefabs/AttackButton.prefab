@@ -267,4 +267,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackButton: {fileID: 2337794410015813315}
-  playerMovement: {fileID: 1539687022650577011, guid: e4b6c205d948888468d8538b675c68b3, type: 3}
+  playerShootingManager: {fileID: 7295937437674435849, guid: e4b6c205d948888468d8538b675c68b3, type: 3}

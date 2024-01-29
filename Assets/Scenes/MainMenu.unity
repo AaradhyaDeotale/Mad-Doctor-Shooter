@@ -542,7 +542,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 5225ed197381e594d81fea8252fb18f7, type: 2}
+    m_Font: {fileID: 2230732570650464555, guid: f86244807710d9942a19f1070512f04e, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -554,7 +554,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: MAD DOCTOR SHOOTER
+  m_Text: MEDICAL MAYHEM
 --- !u!1 &1087643487
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,7 +914,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 5225ed197381e594d81fea8252fb18f7, type: 2}
+    m_Font: {fileID: 12800000, guid: 12f285311a8aa12468632cb1c93e73e1, type: 3}
     m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
@@ -926,7 +926,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Play Game!
+  m_Text: start
 --- !u!222 &1741125533
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -2406,6 +2406,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5464858640249549270, guid: 0a5fd050a5b09dd4fa01803ba6ea802f, type: 3}
+      propertyPath: m_Text
+      value: ATTACK
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464858640249549270, guid: 0a5fd050a5b09dd4fa01803ba6ea802f, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 12f285311a8aa12468632cb1c93e73e1, type: 3}
     - target: {fileID: 7946514503276615757, guid: 0a5fd050a5b09dd4fa01803ba6ea802f, type: 3}
       propertyPath: m_Name
       value: AttackButton

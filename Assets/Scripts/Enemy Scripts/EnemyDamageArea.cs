@@ -13,7 +13,7 @@ public class EnemyDamageArea : MonoBehaviour
 
     private bool canDealDamage;
 
-    [SerializeField] private float damageAmount = 5f;
+    [SerializeField] private float damageAmount = 50f;
 
     //Player Health 
     //private PlayerHealth playerHealth;

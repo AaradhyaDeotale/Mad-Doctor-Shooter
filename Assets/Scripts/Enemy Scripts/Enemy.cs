@@ -108,7 +108,7 @@ public class Enemy : MonoBehaviour
     {
         enemyDied = true;
         enemyAnimation.PlayAnimation(TagManager.DEATH_ANIMATION_NAME);
-        Invoke("DestroyEnemyAfterDelay", deathAniTime);
+        Invoke("DestroyEnemyAfterDelay", 1.5f);
     }
 
     void DestroyEnemyAfterDelay()

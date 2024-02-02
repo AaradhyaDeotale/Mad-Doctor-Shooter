@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class EnemyDamageArea : MonoBehaviour
 {
    [SerializeField]
     private float deactivateWaitTime = 0.1f;

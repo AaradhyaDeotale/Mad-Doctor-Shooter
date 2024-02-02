@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float health = 100f;
 
-    [SerializeField] private SliderJoint2D enemyHealthSlider;
+    [SerializeField] private Slider enemyHealthSlider;
 
     private Enemy enemyScript;
 

@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     private Vector3 tempScale;
 
     [SerializeField]
-    private float stoppingDistance = 1.5f;
+    private float stoppingDistance;
 
     private PlayerAnimation enemyAnimation;
 
@@ -23,6 +23,15 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float attackFinishedWaitTime = 0.5f;
     private float attackFinishedTimer;
+    [SerializeField] private EnemyDamageArea enemyDamageArea;
+
+
+    private bool enemyDied;
+
+    [SerializeField] private float deathAniTime;
+
+    [SerializeField] RectTransform healthBarTransform;
+    private Vector3 healthBarTempScale;
 
     private void Awake()
     {
@@ -32,6 +41,10 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        if (enemyDied)
+        {
+            return;
+        }
         SearchForPlayer();
     }
 
@@ -77,12 +90,29 @@ public class Enemy : MonoBehaviour
 
     void Attack()
     {
-        if(Time.time > attackTimer)
+        if (Time.time > attackTimer)
         {
             attackFinishedTimer = Time.time + attackFinishedWaitTime;
             attackTimer = Time.time + attackWaitTime;
 
             enemyAnimation.PlayAnimation(TagManager.ATTACK_ANIMATION_NAME);
         }
+    }
+    void EnemyAttack()
+    {
+        enemyDamageArea.gameObject.SetActive(true);
+        enemyDamageArea.ResetDeactivateTimer();
+    }
+
+    public void EnemyDied()
+    {
+        enemyDied = true;
+        enemyAnimation.PlayAnimation(TagManager.DEATH_ANIMATION_NAME);
+        Invoke("DestroyEnemyAfterDelay", deathAniTime);
+    }
+
+    void DestroyEnemyAfterDelay()
+    {
+        Destroy(gameObject);
     }
 }

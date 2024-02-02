@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canMove = true;
     private PlayerShootingManager playerShootingManager;
 
+    private bool playerDied;
     void Start()
     {
         // Manually assign AttackButton reference
@@ -42,6 +43,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (playerDied)
+            return;
+
         HandleMovement();
         HandleAnimation();
         HandleFacingDirection();
@@ -151,4 +155,16 @@ public class PlayerMovement : MonoBehaviour
                 Shoot();
         }
     }
-}
+
+    public void PlayerDied()
+    {
+        playerDied = true;
+        playerAnimation.PlayAnimation(TagManager.DEATH_ANIMATION_NAME);
+        Invoke("DestroyPlayerAfterDelay", 2f);
+    }
+
+    void DestroyPlayerAfterDelay()
+    {
+        Destroy(gameObject);
+    }
+}//class

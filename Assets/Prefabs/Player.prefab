@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 5276002832774828698}
   - component: {fileID: 7295937437674435849}
   - component: {fileID: 5449692235735603738}
+  - component: {fileID: 1532520891182770026}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -268,3 +269,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackButton: {fileID: 2337794410015813315, guid: 0a5fd050a5b09dd4fa01803ba6ea802f, type: 3}
   playerShootingManager: {fileID: 0}
+--- !u!114 &1532520891182770026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5933605863781016360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9430e4ebda01c439898fa66998351a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

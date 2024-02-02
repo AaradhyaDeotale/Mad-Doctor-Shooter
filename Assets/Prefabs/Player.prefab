@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 5276002832774828698}
   - component: {fileID: 7295937437674435849}
   - component: {fileID: 5449692235735603738}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -224,9 +224,9 @@ MonoBehaviour:
   minBound_Y: -3.3
   maxBound_Y: 0
   playerAnimation: {fileID: 5276002832774828698}
+  attackButton: {fileID: 2037480757675684937, guid: 0a5fd050a5b09dd4fa01803ba6ea802f, type: 3}
   shootWaitTime: 0.5
   moveWaitTime: 0.3
-  attackButton: {fileID: 2037480757675684937, guid: 0a5fd050a5b09dd4fa01803ba6ea802f, type: 3}
 --- !u!114 &5276002832774828698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4663768371521247638, guid: b2d42b26fc88eb948af2470254b12e39, type: 3}
   bulletSpawnPos: {fileID: 6638115998281122659}
+  shootCooldown: 0.5
 --- !u!114 &5449692235735603738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,4 +267,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackButton: {fileID: 2337794410015813315, guid: 0a5fd050a5b09dd4fa01803ba6ea802f, type: 3}
-  playerMovement: {fileID: 1539687022650577011}
+  playerShootingManager: {fileID: 0}

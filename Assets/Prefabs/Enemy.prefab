@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2021352608209498442}
-  - component: {fileID: 267682153987990501}
+  - component: {fileID: 4723285854779687234}
   m_Layer: 0
   m_Name: Damage Area
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 516427798005703613}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &267682153987990501
+--- !u!114 &4723285854779687234
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2922600172500225717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593556174dd8da8468ec0ad6f4189c12, type: 3}
+  m_Script: {fileID: 11500000, guid: a3b7362998eb5d24cb2ca4a03841c5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deactivateWaitTime: 0.1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  damageAmount: 5
 --- !u!1 &5146754338563666264
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,6 +238,9 @@ MonoBehaviour:
   stoppingDistance: 1.5
   attackWaitTime: 2.5
   attackFinishedWaitTime: 0.5
+  enemyDamageArea: {fileID: 4723285854779687234}
+  deathAniTime: 0
+  healthBarTransform: {fileID: 0}
 --- !u!114 &1874730878087435027
 MonoBehaviour:
   m_ObjectHideFlags: 0

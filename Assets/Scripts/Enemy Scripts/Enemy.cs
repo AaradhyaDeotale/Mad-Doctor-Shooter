@@ -98,7 +98,7 @@ public class Enemy : MonoBehaviour
             enemyAnimation.PlayAnimation(TagManager.ATTACK_ANIMATION_NAME);
         }
     }
-    void EnemyAttack()
+    void EnemyAttacked()
     {
         enemyDamageArea.gameObject.SetActive(true);
         enemyDamageArea.ResetDeactivateTimer();

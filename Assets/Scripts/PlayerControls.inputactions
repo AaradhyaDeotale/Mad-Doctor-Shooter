@@ -1,29 +1,29 @@
 {
-    "name": "New Controls",
+    "name": "PlayerControls",
     "maps": [
         {
-            "name": "New action map",
-            "id": "c61a399e-2472-4575-b6e8-78c62eaf837e",
+            "name": "Player",
+            "id": "cda933a0-b32e-4eb2-b5e3-65ef288ade22",
             "actions": [
                 {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "ef592708-b647-457f-a2a3-fd2127de844c",
-                    "expectedControlType": "Button",
+                    "name": "Walk",
+                    "type": "Value",
+                    "id": "152e75bb-dce5-4aa2-a140-746e382ae1b3",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "f3359d7e-4cb1-41b4-8a08-8a2ad2420f4d",
-                    "path": "",
+                    "id": "040f0815-f2fb-4573-ac1c-6bbe4f6610a5",
+                    "path": "<Joystick>/stick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Walk",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

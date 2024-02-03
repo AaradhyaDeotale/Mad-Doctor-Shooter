@@ -29,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
     private PlayerShootingManager playerShootingManager;
 
     private bool playerDied;
+
+    public MovementJoystick joystick;
+
     void Start()
     {
         // Manually assign AttackButton reference
@@ -41,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         playerShootingManager = GetComponent<PlayerShootingManager>();
     }
 
-    void Update()
+    public void Update()
     {
         if (playerDied)
             return;
@@ -51,6 +54,22 @@ public class PlayerMovement : MonoBehaviour
         HandleFacingDirection();
         HandleShooting();
         HandleAttackButton();
+        HandleInput();
+         Vector2 direction = joystick.GetJoystickInput();
+
+        // Move the player based on joystick input
+        transform.Translate(new Vector3(direction.x, direction.y, 0f) * moveSpeed * Time.deltaTime);
+    }
+
+    void HandleInput()
+    {
+        xAxis = Input.GetAxisRaw(TagManager.HORIZONTAL_AXIS);
+        yAxis = Input.GetAxisRaw(TagManager.VERTICAL_AXIS);
+
+        Vector2 direction = joystick.GetJoystickInput();
+        transform.Translate(new Vector3(direction.x, direction.y, 0f) * moveSpeed * Time.deltaTime);
+
+        // Rest of your input handling code
     }
 
     void HandleMovement()

@@ -7,7 +7,7 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float health = 100f;
 
-    [SerializeField] private SliderJoint2D enemyHealthSlider;
+    [SerializeField] private enemyHealthSlider;
 
     private Enemy enemyScript;
 

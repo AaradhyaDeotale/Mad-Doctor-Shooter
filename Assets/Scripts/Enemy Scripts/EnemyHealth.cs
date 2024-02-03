@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float health = 100f;
-    [SerializeField] private float damageAmount = 50f;
+    [SerializeField] private float damageAmount = 5f;
 
     [SerializeField] private Slider enemyHealthSlider; 
 
@@ -34,9 +34,9 @@ public class EnemyHealth : MonoBehaviour
             //Kill enemy 
             enemyScript.EnemyDied();
 
-            //EnemySpawner.instance.EnemyDied(gameObject);
+            EnemySpawner.instance.EnemyDied(gameObject);
 
-            //GamePlayController.instance.EnemyKilled();
+            GamePlayController.instance.EnemyKilled();
 
         }
 

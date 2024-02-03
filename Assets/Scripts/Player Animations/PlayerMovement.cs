@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private float xAxis, yAxis;
 
     public PlayerAnimation playerAnimation;
-    public AttackButton attackButton; // Add reference to AttackButton script
+    //public AttackButton attackButton; // Add reference to AttackButton script
 
     [SerializeField]
     private float shootWaitTime = 0.5f;
@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         // Manually assign AttackButton reference
-        attackButton = FindObjectOfType<AttackButton>();
+        //attackButton = FindObjectOfType<AttackButton>();
     }
 
     private void Awake()
@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         HandleAnimation();
         HandleFacingDirection();
         HandleShooting();
-        HandleAttackButton();
+        //HandleAttackButton();
         HandleInput();
          Vector2 direction = joystick.GetJoystickInput();
 
@@ -69,7 +69,6 @@ public class PlayerMovement : MonoBehaviour
         Vector2 direction = joystick.GetJoystickInput();
         transform.Translate(new Vector3(direction.x, direction.y, 0f) * moveSpeed * Time.deltaTime);
 
-        // Rest of your input handling code
     }
 
     void HandleMovement()
@@ -98,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = tempPos;
     }
 
-    void HandleAttackButton()
+   /* void HandleAttackButton()
     {
         // Check if the attack button is pressed
         if (attackButton.IsAttacking())
@@ -106,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
             playerAnimation.PlayAttackAnimation();
             Shoot();  // Call the shooting method when the attack button is pressed
         }
-    }
+    } */
 
 
     void HandleAnimation()

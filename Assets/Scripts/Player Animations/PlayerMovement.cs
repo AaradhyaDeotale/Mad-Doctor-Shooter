@@ -30,10 +30,12 @@ public class PlayerMovement : MonoBehaviour
 
     private bool playerDied;
 
-    public MovementJoystick joystick;
+    public MovementJoystick movementJoystick;
+    private Rigidbody2D rb;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         // Manually assign AttackButton reference
         //attackButton = FindObjectOfType<AttackButton>();
     }
@@ -44,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         playerShootingManager = GetComponent<PlayerShootingManager>();
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         if (playerDied)
             return;
@@ -53,9 +55,10 @@ public class PlayerMovement : MonoBehaviour
         HandleAnimation();
         HandleFacingDirection();
         HandleShooting();
+        CheckIfCanMove();
         //HandleAttackButton();
         HandleInput();
-         Vector2 direction = joystick.GetJoystickInput();
+        Vector2 direction = movementJoystick.GetJoystickInput();
 
         // Move the player based on joystick input
         transform.Translate(new Vector3(direction.x, direction.y, 0f) * moveSpeed * Time.deltaTime);
@@ -66,10 +69,19 @@ public class PlayerMovement : MonoBehaviour
         xAxis = Input.GetAxisRaw(TagManager.HORIZONTAL_AXIS);
         yAxis = Input.GetAxisRaw(TagManager.VERTICAL_AXIS);
 
-        Vector2 direction = joystick.GetJoystickInput();
-        transform.Translate(new Vector3(direction.x, direction.y, 0f) * moveSpeed * Time.deltaTime);
-
+        if (movementJoystick != null)
+        {
+            if (movementJoystick.joystickVec.y != 0)
+            {
+                rb.velocity = new Vector2(movementJoystick.joystickVec.x * moveSpeed, movementJoystick.joystickVec.y * moveSpeed);
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+            }
+        }
     }
+
 
     void HandleMovement()
     {
@@ -97,15 +109,15 @@ public class PlayerMovement : MonoBehaviour
         transform.position = tempPos;
     }
 
-   /* void HandleAttackButton()
-    {
-        // Check if the attack button is pressed
-        if (attackButton.IsAttacking())
-        {
-            playerAnimation.PlayAttackAnimation();
-            Shoot();  // Call the shooting method when the attack button is pressed
-        }
-    } */
+    /* void HandleAttackButton()
+     {
+         // Check if the attack button is pressed
+         if (attackButton.IsAttacking())
+         {
+             playerAnimation.PlayAttackAnimation();
+             Shoot();  // Call the shooting method when the attack button is pressed
+         }
+     } */
 
 
     void HandleAnimation()
@@ -148,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
         canMove = false;
         waitBeforeMoving = Time.time + moveWaitTime;
     }
-
+      
     public void Shoot()
     {
         waitBeforeShooting = Time.time + shootWaitTime;
@@ -160,9 +172,12 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckIfCanMove()
     {
-        if (Time.time > waitBeforeMoving)
+        if (!canMove && Time.time > waitBeforeMoving)
+        {
             canMove = true;
+        }
     }
+
 
     void HandleShooting()
     {

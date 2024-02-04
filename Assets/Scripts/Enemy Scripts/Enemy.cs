@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     private Transform playerTarget;
 
     [SerializeField]
-    private float moveSpeed = 50f;
+    private float moveSpeed = 400f;
 
     private Vector3 tempScale;
 
@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     private PlayerAnimation enemyAnimation;
 
     [SerializeField]
-    private float attackWaitTime = 2.5f;
+    private float attackWaitTime = 1.5f;
     private float attackTimer;
 
     [SerializeField]

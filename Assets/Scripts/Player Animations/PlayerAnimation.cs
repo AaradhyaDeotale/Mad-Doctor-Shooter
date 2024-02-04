@@ -8,6 +8,7 @@ public class PlayerAnimation : MonoBehaviour
     private Animator anim;
     private Vector3 tempScale;
     private int currentAnimation;
+    private bool isAttackAnimationPlaying;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class PlayerAnimation : MonoBehaviour
     public void PlayAttackAnimation()
     {
         Debug.Log("Playing Attack Animation");
+        isAttackAnimationPlaying = true;
         StartCoroutine(PlayAttackAnimationCoroutine());
     }
 
@@ -44,8 +46,14 @@ public class PlayerAnimation : MonoBehaviour
         Debug.Log("Start Attack Animation");
         anim.Play(TagManager.ATTACK_ANIMATION_NAME);
         yield return new WaitForSeconds(anim.GetCurrentAnimatorClipInfo(0).Length);
+        isAttackAnimationPlaying = false;
         anim.Play(TagManager.IDLE_ANIMATION_NAME);
         Debug.Log("End Attack Animation");
+    }
+
+    public bool IsAttackAnimationPlaying()
+    {
+        return isAttackAnimationPlaying;
     }
 
 }

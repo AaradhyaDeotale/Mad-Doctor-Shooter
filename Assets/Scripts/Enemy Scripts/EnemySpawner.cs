@@ -12,11 +12,11 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private Transform[] spawnPositions;
 
-    [SerializeField] private int enemySpawnLimit = 10;
+    [SerializeField] private int enemySpawnLimit = 50;
 
     [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
 
-    [SerializeField] private float minSpawnTime = 2f, maxSpawnTime = 5f;
+    [SerializeField] private float minSpawnTime = 0.2f, maxSpawnTime = 1f;
 
     private void Awake()
     {

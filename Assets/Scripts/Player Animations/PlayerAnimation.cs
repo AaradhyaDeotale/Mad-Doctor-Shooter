@@ -1,54 +1,42 @@
 using System.Collections;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
+public class PlayerAnimation : MonoBehaviour{
 
-public class PlayerAnimation : MonoBehaviour
-{
-    private Animator anim;
+    private Animator animator;
+
     private Vector3 tempScale;
+
     private int currentAnimation;
 
-    private void Awake()
-    {
-        anim = GetComponent<Animator>();
+    private void Awake() {
+        animator = GetComponent<Animator>();
+
     }
 
-    public void PlayAnimation(string animationName)
-    {
-        if (currentAnimation == Animator.StringToHash(animationName))
-            return;
+    public void PlayAnimation(string animationName) {
 
-        anim.Play(animationName);
+        if(currentAnimation == Animator.StringToHash(animationName)) {
+            return;
+        }
+
+        animator.Play(animationName);
+
         currentAnimation = Animator.StringToHash(animationName);
     }
 
-    public void SetFacingDirection(bool faceRight)
-    {
-        if (faceRight)
+    public void SetFaceDirection(bool faceRight) {
+        tempScale = transform.localScale;
+
+        if (faceRight) {
             tempScale.x = 1f;
-        else
+        }
+        else {
             tempScale.x = -1f;
+        }
 
         transform.localScale = tempScale;
     }
 
-    public void PlayAttackAnimation()
-    {
-        Debug.Log("Playing Attack Animation");
-        StartCoroutine(PlayAttackAnimationCoroutine());
-    }
-
-    private IEnumerator PlayAttackAnimationCoroutine()
-    {
-        Debug.Log("Start Attack Animation");
-        anim.Play(TagManager.ATTACK_ANIMATION_NAME);
-        yield return new WaitForSeconds(anim.GetCurrentAnimatorClipInfo(0).Length);
-        anim.Play(TagManager.IDLE_ANIMATION_NAME);
-        Debug.Log("End Attack Animation");
-    }
-
 }
-
-
-

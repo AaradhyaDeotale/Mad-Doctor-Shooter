@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     private bool MoveDown;
     public PlayerAnimation playerAnimation;
     //public AttackButton attackButton; // Add reference to AttackButton script
+    [SerializeField]
+    private float autoShootInterval = 2.5f; // Interval for automatic shooting
+    private float lastShootTime; // Timestamp of the last shot
 
     [SerializeField]
     private float shootWaitTime = 0.5f;
@@ -153,7 +156,22 @@ public class PlayerMovement : MonoBehaviour
         canMove = false;
         waitBeforeMoving = Time.time + moveWaitTime;
     }
+    private void HandleShooting()
+    {
+        // Check if the player presses the K key to shoot manually
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Debug.Log("Shooting key pressed");
+            Shoot();
+        }
 
+        // Check if it's time for automatic shooting based on the interval
+        if (Time.time > lastShootTime + autoShootInterval)
+        {
+            Shoot();
+            lastShootTime = Time.time; // Update the last shoot time
+        }
+    }
     public void Shoot()
     {
         waitBeforeShooting = Time.time + shootWaitTime;
@@ -239,15 +257,7 @@ public class PlayerMovement : MonoBehaviour
             verticalMove = 0;
         }
     }
-    void HandleShooting()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Debug.Log("Shooting key pressed");
-            if (Time.time > waitBeforeShooting)
-                Shoot();
-        }
-    }
+
 
     public void PlayerDied()
     {

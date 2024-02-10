@@ -353,7 +353,7 @@ MonoBehaviour:
   attackFinishedWaitTime: 0.5
   enemyDamageArea: {fileID: 4723285854779687234}
   deathAniTime: 0
-  healthBarTransform: {fileID: 0}
+  healthBarTransform: {fileID: 3912517722045667805}
 --- !u!114 &1874730878087435027
 MonoBehaviour:
   m_ObjectHideFlags: 0

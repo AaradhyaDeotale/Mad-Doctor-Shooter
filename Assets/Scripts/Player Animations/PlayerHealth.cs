@@ -34,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
             // Player Died 
             playerMovement.PlayerDied();
 
-            GamePlayController.instance.RestartGame();
+            GamePlayController.instance.EndGame();
         }
         playerHealthSlider.value = health;
 

@@ -28,13 +28,13 @@ public class GamePlayController : MonoBehaviour
 
     }
 
-    public void RestartGame()
+    public void EndGame()
     {
-        Invoke("Restart", 3f);
+        Invoke("End", 3f);
     }
-    public void Restart()
+    public void End()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Gameplay");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
 }

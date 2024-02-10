@@ -12,7 +12,12 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 tempPos;
     private float xAxis, yAxis;
-
+    private float horizontalMove;
+    private float verticalMove;
+    private bool MoveRight;
+    private bool MoveLeft;
+    private bool MoveUp;
+    private bool MoveDown;
     public PlayerAnimation playerAnimation;
     //public AttackButton attackButton; // Add reference to AttackButton script
 
@@ -30,12 +35,16 @@ public class PlayerMovement : MonoBehaviour
 
     private bool playerDied;
 
-    public MovementJoystick movementJoystick;
+    //public MovementJoystick movementJoystick;
     private Rigidbody2D rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        MoveLeft = false;
+        MoveRight = false;
+        MoveUp = false;
+        MoveDown = false;
         // Manually assign AttackButton reference
         //attackButton = FindObjectOfType<AttackButton>();
     }
@@ -58,10 +67,9 @@ public class PlayerMovement : MonoBehaviour
         CheckIfCanMove();
         //HandleAttackButton();
         HandleInput();
-        Vector2 direction = movementJoystick.GetJoystickInput();
-
-        // Move the player based on joystick input
-        transform.Translate(new Vector3(direction.x, direction.y, 0f) * moveSpeed * Time.deltaTime);
+        HorizontalMovement();
+        VerticalMovement();// Call the Movement method to handle left and right movement
+        rb.velocity = new Vector2(horizontalMove, verticalMove);
     }
 
     void HandleInput()
@@ -69,17 +77,6 @@ public class PlayerMovement : MonoBehaviour
         xAxis = Input.GetAxisRaw(TagManager.HORIZONTAL_AXIS);
         yAxis = Input.GetAxisRaw(TagManager.VERTICAL_AXIS);
 
-        if (movementJoystick != null)
-        {
-            if (movementJoystick.joystickVec.y != 0)
-            {
-                rb.velocity = new Vector2(movementJoystick.joystickVec.x * moveSpeed, movementJoystick.joystickVec.y * moveSpeed);
-            }
-            else
-            {
-                rb.velocity = Vector2.zero;
-            }
-        }
     }
 
 
@@ -120,33 +117,27 @@ public class PlayerMovement : MonoBehaviour
      } */
 
 
-    void HandleAnimation()
+    private void HandleAnimation()
     {
         if (!canMove)
             return;
 
         if (playerAnimation != null)
         {
-            if (Mathf.Abs(xAxis) > 0 || Mathf.Abs(yAxis) > 0)
+            if (Mathf.Abs(horizontalMove) > 0 || Mathf.Abs(verticalMove) > 0)
                 playerAnimation.PlayAnimation(TagManager.WALK_ANIMATION_NAME);
             else
                 playerAnimation.PlayAnimation(TagManager.IDLE_ANIMATION_NAME);
         }
     }
 
-    void HandleFacingDirection()
+    private void HandleFacingDirection()
     {
         if (playerAnimation != null)
         {
-            if (xAxis != 0) // Check if the player is moving horizontally
-            {
-                if (xAxis > 0)
-                    playerAnimation.SetFacingDirection(true); // Face right when moving right
-                else
-                    playerAnimation.SetFacingDirection(false); // Face left when moving left
-            }
+            if (horizontalMove != 0)
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * Mathf.Sign(horizontalMove), transform.localScale.y, transform.localScale.z);
 
-            // Ensure Y and Z scales are not set to 0
             if (Mathf.Abs(transform.localScale.y) < 0.001f)
                 transform.localScale = new Vector3(transform.localScale.x, 1f, transform.localScale.z);
 
@@ -155,12 +146,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
+
     void StopMovement()
     {
         canMove = false;
         waitBeforeMoving = Time.time + moveWaitTime;
     }
-      
+
     public void Shoot()
     {
         waitBeforeShooting = Time.time + shootWaitTime;
@@ -178,7 +171,74 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void pointerDownLeft()
+    {
+        MoveLeft = true;
+    }
 
+    public void pointerUpLeft()
+    {
+        MoveLeft = false;
+    }
+
+    public void pointerDownRight()
+    {
+        MoveRight = true;
+    }
+
+    public void pointerUpRight()
+    {
+        MoveRight = false;
+    }
+    public void PointerDownUp()
+    {
+        MoveUp = true;
+    }
+
+    public void PointerUpUp()
+    {
+        MoveUp = false;
+    }
+
+    public void PointerDownDown()
+    {
+        MoveDown = true;
+    }
+
+    public void PointerUpDown()
+    {
+        MoveDown = false;
+    }
+    void HorizontalMovement()
+    {
+        if (MoveLeft)
+        {
+            horizontalMove = -moveSpeed;
+        }
+        else if (MoveRight)
+        {
+            horizontalMove = moveSpeed;
+        }
+        else
+        {
+            horizontalMove = 0;
+        }
+    }
+    void VerticalMovement()
+    {
+        if (MoveUp)
+        {
+            verticalMove = moveSpeed;
+        }
+        else if (MoveDown)
+        {
+            verticalMove = -moveSpeed;
+        }
+        else
+        {
+            verticalMove = 0;
+        }
+    }
     void HandleShooting()
     {
         if (Input.GetKeyDown(KeyCode.K))
